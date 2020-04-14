@@ -28,15 +28,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class          instance   title       tags mask   switchtotag   isfloating   monitor */
-	{ "Gimp",         NULL,      NULL,       0,          0,            1,           -1 },
-	{ "Pavucontrol",  NULL,      NULL,       0,          0,            1,           -1 },
-	{ "Arandr",       NULL,      NULL,       0,          0,            1,           -1 },
-	{ "feh",          NULL,      NULL,       0,          0,            1,           -1 },
-	{ "Galculator",   NULL,      NULL,       0,          0,            1,           -1 },
-	{ "EasyConnect",  NULL,      NULL,       0,          0,            1,           -1 },
-	{ "mpv",          NULL,      NULL,       1 << 5,     1,            0,           -1 },
-	{ "Alacritty",    NULL,      "neomutt",  1 << 8,     1,            0,           -1 },
+	/* class          instance   title         tags mask   switchtotag   isfloating   monitor */
+	{ "Gimp",         NULL,      NULL,         0,          0,            1,           -1 },
+	{ "Pavucontrol",  NULL,      NULL,         0,          0,            1,           -1 },
+	{ "Arandr",       NULL,      NULL,         0,          0,            1,           -1 },
+	{ "feh",          NULL,      NULL,         0,          0,            1,           -1 },
+	{ "Galculator",   NULL,      NULL,         0,          0,            1,           -1 },
+	{ "EasyConnect",  NULL,      NULL,         0,          0,            1,           -1 },
+	{ "mpv",          NULL,      NULL,         1 << 5,     1,            0,           -1 },
+	{ "Alacritty",    NULL,      "neomutt",    1 << 8,     1,            0,           -1 },
+	{ "Alacritty",    NULL,      "pulsemixer", 0,          0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -80,10 +81,12 @@ static Key keys[] = {
 	{ MODKEY,            XK_a,                      spawn,     {.v = dmenucmd } },
 	{ MODKEY,            XK_Return,                 spawn,     {.v = termcmd } },
 	{ MODKEY,            XK_w,                      spawn,     CMD("chromium") },
-	{ MODKEY,            XK_v,                      spawn,     CMD("pavucontrol") },
+	{ MODKEY,            XK_v,                      spawn,     SHCMD("alacritty -t pulsemixer -e pulsemixer") },
 	{ MODKEY|ShiftMask,  XK_Return,                 spawn,     CMD("pcmanfm") },
 	{ MODKEY|ShiftMask,  XK_m,                      spawn,     SHCMD("alacritty -t neomutt -e neomutt ; pkill -RTMIN+12 dwmblocks") },
 	{ MODKEY,            XK_m,                      spawn,     SHCMD("mailsync") },
+	{ MODKEY,            XK_n,                      spawn,     SHCMD("filebrowser.sh") },
+	{ MODKEY,            XK_p,                      spawn,     SHCMD("displayselect") },
 	/* sound light control */
 	{ 0,                 XF86XK_AudioMute,          spawn,     SHCMD("volume --togmute") },
 	{ 0,                 XF86XK_AudioRaiseVolume,   spawn,     SHCMD("volume --up") },
@@ -92,14 +95,15 @@ static Key keys[] = {
 	{ MODKEY,            XK_equal,                  spawn,     SHCMD("volume --up") },
 	{ MODKEY,            XK_minus,                  spawn,     SHCMD("volume --down") },
 	{ 0,                 XF86XK_MonBrightnessUp,    spawn,     SHCMD("xbacklight -inc 10") },
-	{ 0,                 XF86XK_MonBrightnessDown,  spawn,     SHCMD("xbacklight -inc 10") },
+	{ 0,                 XF86XK_MonBrightnessDown,  spawn,     SHCMD("xbacklight -dec 10") },
 	/* dmenu scripts */
 	{ MODKEY,            XK_d,                      spawn,     CMD("setdpi.sh") },
 	{ MODKEY,            XK_x,                      spawn,     CMD("logout.sh") },
 	{ MODKEY,            XK_s,                      spawn,     CMD("restartsvc.sh") },
 	{ MODKEY,            XK_t,                      spawn,     CMD("tray.sh") },
-	{ MODKEY,            XK_n,                      spawn,     CMD("nextwin.sh") },
-	{ Mod1Mask,          XK_l,                      spawn,     SHCMD("checklock.sh --force") },
+	{ MODKEY|ShiftMask,  XK_u,                      spawn,     CMD("partitionmount") },
+	{ MODKEY,            XK_u,                      spawn,     CMD("partitionumount") },
+	{ MODKEY|ShiftMask,  XK_l,                      spawn,     SHCMD("checklock.sh --force") },
 	{ 0,                 XK_Print,                  spawn,     CMD("printscreen.sh") },
 	/* workspace navigation */
 	{ MODKEY,                       XK_l,      shiftview,       {.i = +1 } },
@@ -109,8 +113,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,       {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_h,      tagtoleft,       {0} },
-	{ MODKEY|ShiftMask,             XK_l,      tagtoright,      {0} },
+	{ MODKEY,                       XK_y,      tagtoleft,       {0} },
+	{ MODKEY,                       XK_o,      tagtoright,      {0} },
 	/* window control */
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating,  {0} },
 	{ MODKEY,                       XK_f,      togglefullscr,   {0} },
@@ -137,6 +141,11 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_minus,  setgaps,        {.i = -5 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = +5 } },
 	{ MODKEY|ShiftMask,             XK_0,      setgaps,        {.i = 0  } },
+	/* monitor control */
+	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
         /* dwm control */
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	/* not used */
@@ -147,10 +156,6 @@ static Key keys[] = {
 	/* { MODKEY,                       XK_Tab,    view,           {0} }, */
 	/* { MODKEY|ShiftMask,             XK_0,      view,           {.ui = ~0 } }, */
 	/* { MODKEY|ControlMask,           XK_0,      tag,            {.ui = ~0 } }, */
-	/* { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } }, */
-	/* { MODKEY,                       XK_period, focusmon,       {.i = +1 } }, */
-	/* { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } }, */
-	/* { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } }, */
 };
 
 /* button definitions */
@@ -161,7 +166,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkStatusText,        0,              Button3,        spawn,          SHCMD("pkill -RTMIN+5 dwmblocks") },
+	{ ClkStatusText,        0,              Button3,        spawn,          SHCMD("cat $HOME/.local/share/weatherreport* | dmenu -c -l 3 -p 'Weather'") },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
