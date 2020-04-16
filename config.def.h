@@ -73,6 +73,7 @@ static const char *termcmd[]  = { "alacritty", NULL };
 
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
+#include "tagadjacent.c"
 static Key keys[] = {
 	/* modifier,         key,                       function,  argument */
 	/* applications */
@@ -108,6 +109,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,      {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_h,      tagtoleft,       {0} },
+	{ MODKEY|ShiftMask,             XK_l,      tagtoright,      {0} },
 	/* window control */
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating,  {0} },
 	{ MODKEY,                       XK_f,      togglefullscr,   {0} },
