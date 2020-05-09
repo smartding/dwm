@@ -1,6 +1,6 @@
 diff -up a/config.def.h b/config.def.h
---- a/config.def.h	2019-07-21 22:43:04.535873031 +0200
-+++ b/config.def.h	2019-07-24 08:48:08.038433535 +0200
+--- a/config.def.h	2020-04-17 13:37:50.926942626 +0200
++++ b/config.def.h	2020-04-25 15:24:56.722215722 +0200
 @@ -2,6 +2,7 @@
  
  /* appearance */
@@ -20,13 +20,13 @@ diff -up a/config.def.h b/config.def.h
  	TAGKEYS(                        XK_2,                      1)
  	TAGKEYS(                        XK_3,                      2)
 diff -up a/dwm.c b/dwm.c
---- a/dwm.c	2019-07-21 22:43:04.535873031 +0200
-+++ b/dwm.c	2019-07-24 08:50:44.989360476 +0200
+--- a/dwm.c	2020-04-17 13:37:50.926942626 +0200
++++ b/dwm.c	2020-04-25 15:29:37.664175514 +0200
 @@ -119,6 +119,7 @@ struct Monitor {
  	int by;               /* bar geometry */
  	int mx, my, mw, mh;   /* screen size */
  	int wx, wy, ww, wh;   /* window area  */
-+	int gappx;            /* gaps between windows */
++	unsigend int gappx;   /* gaps between windows */
  	unsigned int seltags;
  	unsigned int sellt;
  	unsigned int tagset[2];
@@ -77,7 +77,7 @@ diff -up a/dwm.c b/dwm.c
  setlayout(const Arg *arg)
  {
  	if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
-@@ -1673,26 +1693,35 @@ tagmon(const Arg *arg)
+@@ -1673,26 +1693,37 @@ tagmon(const Arg *arg)
  void
  tile(Monitor *m)
  {
@@ -113,13 +113,15 @@ diff -up a/dwm.c b/dwm.c
 -			my += HEIGHT(c);
 +			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
 +			resize(c, m->wx + m->gappx, m->wy + my, mw - 2*c->bw - m->gappx*(5-ns)/2, h - 2*c->bw, 0);
-+			my += HEIGHT(c) + m->gappx;
++			if(my + HEIGHT(c) + m->gappx < m->wh)
++				my += HEIGHT(c) + m->gappx;
  		} else {
 -			h = (m->wh - ty) / (n - i);
 -			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
 -			ty += HEIGHT(c);
 +			h = (m->wh - ty) / (n - i) - m->gappx;
 +			resize(c, m->wx + mw + m->gappx/ns, m->wy + ty, m->ww - mw - (2*c->bw) - m->gappx*(5-ns)/2, h - 2*c->bw, 0);
-+			ty += HEIGHT(c) + m->gappx;
++			if(ty + HEIGHT(c) + m->gappx < m->wh)
++				ty += HEIGHT(c) + m->gappx;
  		}
  }
