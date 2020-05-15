@@ -28,16 +28,17 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class          instance   title         tags mask   switchtotag   isfloating   monitor */
-	{ "Gimp",         NULL,      NULL,         0,          0,            1,           -1 },
-	{ "Pavucontrol",  NULL,      NULL,         0,          0,            1,           -1 },
-	{ "Arandr",       NULL,      NULL,         0,          0,            1,           -1 },
-	{ "feh",          NULL,      NULL,         0,          0,            1,           -1 },
-	{ "Galculator",   NULL,      NULL,         0,          0,            1,           -1 },
-	{ "EasyConnect",  NULL,      NULL,         0,          0,            1,           -1 },
-	{ "mpv",          NULL,      NULL,         1 << 5,     1,            0,           -1 },
-	{ "Alacritty",    NULL,      "neomutt",    1 << 8,     1,            0,           -1 },
-	{ "Alacritty",    NULL,      "pulsemixer", 0,          0,            1,           -1 },
+	/* class          instance   title         tags mask   switchtotag   iscentered     isfloating   monitor */
+	{ "Gimp",         NULL,      NULL,         0,          0,            0,             1,           -1 },
+	{ "Pavucontrol",  NULL,      NULL,         0,          0,            1,             1,           -1 },
+	{ "Arandr",       NULL,      NULL,         0,          0,            1,             1,           -1 },
+	{ "feh",          NULL,      NULL,         0,          0,            1,             1,           -1 },
+	{ "Galculator",   NULL,      NULL,         0,          0,            1,             1,           -1 },
+	{ "Gsimplecal",   NULL,      NULL,         0,          0,            1,             1,           -1 },
+	{ "EasyConnect",  NULL,      NULL,         0,          0,            0,             1,           -1 },
+	{ "mpv",          NULL,      NULL,         1 << 5,     1,            0,             0,           -1 },
+	{ "Alacritty",    NULL,      "neomutt",    1 << 8,     1,            0,             0,           -1 },
+	{ "Alacritty",    NULL,      "pulsemixer", 0,          0,            1,             1,           -1 },
 };
 
 /* layout(s) */
