@@ -44,7 +44,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
@@ -52,8 +52,8 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 #include "movestack.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "###",      gaplessgrid }, /* first entry is default */
-	{ "[]=",      tile },
+	{ "[]=",      tile }, /* first entry is default */
+	{ "###",      gaplessgrid },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 };
@@ -126,8 +126,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} },
 	/* layout control */
-	{ MODKEY|ControlMask,           XK_g,      setlayout,       {.v = &layouts[0]} },
-	{ MODKEY|ControlMask,           XK_t,      setlayout,       {.v = &layouts[1]} },
+	{ MODKEY|ControlMask,           XK_t,      setlayout,       {.v = &layouts[0]} },
+	{ MODKEY|ControlMask,           XK_g,      setlayout,       {.v = &layouts[1]} },
 	{ MODKEY|ControlMask,           XK_f,      setlayout,       {.v = &layouts[2]} },
 	{ MODKEY|ControlMask,           XK_m,      setlayout,       {.v = &layouts[3]} },
 	{ MODKEY|ControlMask,           XK_space,  setlayout,       {0} },
