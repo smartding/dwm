@@ -99,7 +99,7 @@ static Key keys[] = {
 	{ 0,                 XF86XK_MonBrightnessUp,    spawn,     SHCMD("xbacklight -inc 10") },
 	{ 0,                 XF86XK_MonBrightnessDown,  spawn,     SHCMD("xbacklight -dec 10") },
 	/* dmenu scripts */
-	{ MODKEY,            XK_d,                      spawn,     CMD("setdpi.sh") },
+	{ MODKEY,            XK_d,                      spawn,     CMD("setdpi") },
 	{ MODKEY,            XK_x,                      spawn,     CMD("logout.sh") },
 	{ MODKEY,            XK_s,                      spawn,     CMD("restartsvc.sh") },
 	{ MODKEY|ShiftMask,  XK_s,                      spawn,     SHCMD("restartsvc.sh --force") },
