@@ -38,9 +38,9 @@ static const Rule rules[] = {
 	{ "Gcr-prompter", NULL,      NULL,         0,          0,            1,             1,           0,         0,        -1 },
 	{ "EasyConnect",  NULL,      NULL,         0,          0,            0,             1,           0,         0,        -1 },
 	{ "mpv",          NULL,      NULL,         1 << 6,     1,            0,             0,           0,         0,        -1 },
-	{ "Alacritty",    NULL,      NULL,         0,          0,            0,             0,           1,         0,        -1 },
-	{ "Alacritty",    NULL,      "neomutt",    1 << 8,     1,            0,             0,           0,         0,        -1 },
-	{ "Alacritty",    NULL,      "pulsemixer", 0,          0,            1,             1,           0,         0,        -1 },
+	{ "St",           NULL,      NULL,         0,          0,            0,             0,           1,         0,        -1 },
+	{ "St",           NULL,      "neomutt",    1 << 8,     1,            0,             0,           0,         0,        -1 },
+	{ "St",           NULL,      "pulsemixer", 0,          0,            1,             1,           0,         0,        -1 },
 };
 
 /* layout(s) */
@@ -73,7 +73,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-i", "-l", "5", "-c", "-p", "Run", NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
@@ -84,9 +84,9 @@ static Key keys[] = {
 	{ MODKEY,            XK_a,                      spawn,     {.v = dmenucmd } },
 	{ MODKEY,            XK_Return,                 spawn,     {.v = termcmd } },
 	{ MODKEY,            XK_w,                      spawn,     CMD("chromium") },
-	{ MODKEY,            XK_v,                      spawn,     SHCMD("alacritty -t pulsemixer -e pulsemixer") },
+	{ MODKEY,            XK_v,                      spawn,     SHCMD("st -t pulsemixer -e pulsemixer") },
 	{ MODKEY|ShiftMask,  XK_Return,                 spawn,     CMD("pcmanfm") },
-	{ MODKEY|ShiftMask,  XK_m,                      spawn,     SHCMD("alacritty -t neomutt -e neomutt ; pkill -RTMIN+12 dwmblocks") },
+	{ MODKEY|ShiftMask,  XK_m,                      spawn,     SHCMD("st -t neomutt -e neomutt ; pkill -RTMIN+12 dwmblocks") },
 	{ MODKEY,            XK_m,                      spawn,     SHCMD("mw -Y") },
 	{ MODKEY,            XK_e,                      spawn,     SHCMD("open-dmenu") },
 	{ MODKEY,            XK_p,                      spawn,     SHCMD("display-dmenu") },
