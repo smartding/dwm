@@ -30,7 +30,6 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class          instance   title         tags mask   switchtotag   iscentered     isfloating   isterminal noswallow monitor */
-	{ "Gimp",         NULL,      NULL,         0,          0,            0,             1,           0,         0,        -1 },
 	{ "Pavucontrol",  NULL,      NULL,         0,          0,            1,             1,           0,         0,        -1 },
 	{ "Arandr",       NULL,      NULL,         0,          0,            1,             1,           0,         0,        -1 },
 	{ "feh",          NULL,      NULL,         0,          0,            1,             1,           0,         0,        -1 },
