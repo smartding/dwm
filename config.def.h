@@ -104,7 +104,7 @@ static Key keys[] = {
 	{ MODKEY,            XK_x,                      spawn,     CMD("logout.sh") },
 	{ MODKEY,            XK_s,                      spawn,     CMD("restartsvc.sh") },
 	{ MODKEY|ShiftMask,  XK_s,                      spawn,     SHCMD("restartsvc.sh --force") },
-	{ MODKEY,            XK_n,                      spawn,     CMD("networkmanager_dmenu") },
+	{ MODKEY,            XK_n,                      spawn,     CMD("iwd-dmenu") },
 	{ MODKEY,            XK_i,                      spawn,     CMD("partitionmount") },
 	{ MODKEY,            XK_u,                      spawn,     CMD("partitionumount") },
 	{ MODKEY,            XK_semicolon,              spawn,     SHCMD("checklock.sh --force") },
