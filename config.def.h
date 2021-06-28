@@ -34,6 +34,7 @@ static const Rule rules[] = {
 	{ "feh",          NULL,      NULL,         0,          0,            1,             1,           -1 },
 	{ "Galculator",   NULL,      NULL,         0,          0,            1,             1,           -1 },
 	{ "Gsimplecal",   NULL,      NULL,         0,          0,            1,             1,           -1 },
+	{ "Gcr-prompter", NULL,      NULL,         0,          0,            1,             1,           -1 },
 	{ "EasyConnect",  NULL,      NULL,         0,          0,            0,             1,           -1 },
 	{ "mpv",          NULL,      NULL,         1 << 5,     1,            0,             0,           -1 },
 	{ "Alacritty",    NULL,      "neomutt",    1 << 8,     1,            0,             0,           -1 },
